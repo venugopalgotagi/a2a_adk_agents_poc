@@ -51,7 +51,8 @@ class HostAgent:
                 raise
 
     async def get_agents(self) -> list[dict]:
-        self.tools = await self.get_tools_async()
+        if len(self.tools) == 0:
+            self.tools = await self.get_tools_async()
         tool = [tool for tool in self.tools if tool.name == 'list_registered_agents'][0]
         try:
             agents = await tool.run_async(args={}, tool_context=None)
@@ -63,11 +64,31 @@ class HostAgent:
 
     async def execute_agent(self,content: bytes, agent_name:str, agent_uri:str, mime_type:str):
         logging.info(f"Executing agent {agent_name} {agent_uri} {mime_type}")
-        tool = [tool for tool in self.tools if tool.name == 'agent_executor'][0]
+        
+        # Ensure tools are loaded
+        if not self.tools:
+            self.tools = await self.get_tools_async()
+            
+        tools_list = [tool for tool in self.tools if tool.name == 'agent_executor']
+        
+        if not tools_list:
+            # Refresh tools and try again
+            logging.info("Tool 'agent_executor' not found, refreshing tools list...")
+            self.tools = await self.get_tools_async()
+            tools_list = [tool for tool in self.tools if tool.name == 'agent_executor']
+            
+        if not tools_list:
+            available_tools = [t.name for t in self.tools]
+            error_msg = f"Tool 'agent_executor' not found. Available tools: {available_tools}"
+            logging.error(error_msg)
+            return {"error": error_msg}
+            
+        tool = tools_list[0]
         try:
             result = await tool.run_async(args={'content':content,'agent_url':agent_uri,'mime_type':mime_type}, tool_context=None)
-            parsed_result = json.loads(result['content'][0]['text'])
-            return parsed_result
+            if 'content' in result and len(result['content']) > 0:
+                parsed_result = json.loads(result['content'][0]['text'])
+                return parsed_result
         except Exception as e:
             logging.error(f"Error executing agent {agent_name}: {e}")
 
