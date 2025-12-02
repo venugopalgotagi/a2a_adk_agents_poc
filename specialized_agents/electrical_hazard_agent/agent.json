@@ -1,0 +1,34 @@
+{
+  "capabilities": {
+    "pushNotifications": true,
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "video"
+  ],
+  "defaultOutputModes": [
+    "pdf",
+    "html",
+    "text",
+    "json"
+  ],
+  "description": "Video Risk Analyser Agent Card",
+  "name": "electrical_hazard_agent",
+  "preferredTransport": "JSONRPC",
+  "protocolVersion": "0.3.0",
+  "skills": [
+    {
+      "description": "Expert in analysing image or video for possible risks or hazards related to environment, health and safety",
+      "id": "6efd02c5-8a22-4437-8138-08c90d38b53a",
+      "name": "electrical_hazard_agent_Skill",
+      "tags": [
+        "Video Risk Analyser",
+        "VRA",
+        "EHS Risk Analyser"
+      ]
+    }
+  ],
+  "supportsAuthenticatedExtendedCard": true,
+  "url": "http://127.0.0.1:8000/a2a/electrical_hazard_agent",
+  "version": "1.0.0"
+}

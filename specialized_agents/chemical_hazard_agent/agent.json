@@ -1,0 +1,31 @@
+{
+  "capabilities": {
+    "pushNotifications": true,
+    "streaming": true
+  },
+  "defaultInputModes": [
+    "video"
+  ],
+  "defaultOutputModes": [
+    "json"
+  ],
+  "description": "Chemical Risk or Hazard Analyser Agent Card",
+  "name": "chemical_hazard_agent",
+  "preferredTransport": "JSONRPC",
+  "protocolVersion": "0.3.0",
+  "skills": [
+    {
+      "description": "Expert in analysing image or video for possible chemical risks or hazards",
+      "id": "6efd02c5-8a22-4437-8138-08c90d38b53a",
+      "name": "chemical_hazard_agent_Skill",
+      "tags": [
+        "Video Risk Analyser",
+        "chemical hazard agent",
+        "EHS Risk Analyser"
+      ]
+    }
+  ],
+  "supportsAuthenticatedExtendedCard": true,
+  "url": "http://127.0.0.1:8000/a2a/chemical_hazard_agent",
+  "version": "1.0.0"
+}
