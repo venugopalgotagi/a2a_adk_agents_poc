@@ -61,7 +61,6 @@ async def upload_video(user_id:str,file: UploadFile = File(...)):
             })
         response : AsyncGenerator[google.adk.events.Event] = runner.run_async(user_id=session.user_id,
                                                                                     session_id=session.id,
-                                                                                    state_delta={},
                                                                                     new_message=Content(
                                                                                         role="user",
                                                                                         parts=[

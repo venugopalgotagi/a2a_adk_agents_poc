@@ -105,8 +105,8 @@ class HostAgent:
         2. For EACH agent returned by 'get_agents':
            - Call the 'execute_agent' tool.
            - Pass the agent's 'name' and 'uri' from the list.
-           - Pass 'mime_type' as state['mime_type'].
-           - Pass 'content' as state['file_path'].
+           - Pass 'mime_type' as {{mime_type}}.
+           - Pass 'content' as {{file_path}}.
            - Execute each agent EXACTLY ONCE.
         3. Finally, return the consolidated report to the user.
         
